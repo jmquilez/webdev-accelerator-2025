@@ -45,6 +45,14 @@ const apiKey = import.meta.env.N2YO_API_KEY;
 		padding: 2rem;
 		max-width: 1200px;
 		margin: 0 auto;
+		background: rgba(255, 255, 255, 0.75);
+		border-radius: 12px;
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+		backdrop-filter: blur(10px);
+		margin-top: 2rem;
+		margin-bottom: 2rem;
+		position: relative;
+		z-index: 10;
 	}
 
 	.map-section {
@@ -78,7 +86,8 @@ const apiKey = import.meta.env.N2YO_API_KEY;
 
 	.api-notice.success p {
 		margin: 0;
-		color: #155724;
+		color: #0d4318;
+		font-weight: 500;
 	}
 
 	.api-notice.error {
