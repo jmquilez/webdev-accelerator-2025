@@ -22,13 +22,19 @@ En el archivo `astro.config.mjs` configuramos Astro para usar TypeScript y sopor
 
 ```js
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'server'
+  output: 'server',
+  env: {
+    schema: {N2YO_API_KEY: envField.string({context: "client",
+      access: "public",
+      optional: true,
+      default: "default"})
+    }
+  }
 });
-
 ```
 
 ---
@@ -505,6 +511,7 @@ Para simular datos reales, creamos un endpoint en `src/pages/api/satellites.ts` 
 
 ```ts
 import type { APIRoute } from 'astro';
+import { N2YO_API_KEY as apiKey } from 'astro:env/client';
 
 export const GET: APIRoute = async ({ url, request }) => {
   // Try multiple ways to get the parameters
@@ -528,7 +535,7 @@ export const GET: APIRoute = async ({ url, request }) => {
   console.log('Extracted params:', { latitude, longitude, searchRadius, satelliteCategory, limit });
   
   // Get API key from environment
-  const apiKey = import.meta.env.N2YO_API_KEY;
+  //const apiKey = import.meta.env.N2YO_API_KEY;
   
   if (!apiKey) {
     return new Response(JSON.stringify({ error: 'API key not configured' }), {
