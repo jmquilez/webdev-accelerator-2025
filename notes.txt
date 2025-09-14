@@ -1,3 +1,0 @@
-- Decirles q se generen varias claves de la API de N2YO
-- Mencionar para qué sirven el .gitignore y .env (y q lo usen)
-- src/pages/api = backend
