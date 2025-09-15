@@ -6,13 +6,6 @@ export const GET: APIRoute = async ({ url, request }) => {
   const searchParams = url.searchParams;
   const requestUrl = new URL(request.url);
   
-  console.log('Full URL:', url.href);
-  console.log('Request URL:', request.url);
-  console.log('Search params from url:', url.search);
-  console.log('Search params from request:', requestUrl.search);
-  console.log('SearchParams object:', Object.fromEntries(searchParams));
-  console.log('RequestURL SearchParams:', Object.fromEntries(requestUrl.searchParams));
-  
   // Try to get parameters from both sources
   const latitude = searchParams.get('latitude') || requestUrl.searchParams.get('latitude');
   const longitude = searchParams.get('longitude') || requestUrl.searchParams.get('longitude');
@@ -23,7 +16,7 @@ export const GET: APIRoute = async ({ url, request }) => {
   console.log('Extracted params:', { latitude, longitude, searchRadius, satelliteCategory, limit });
   
   // Get API key from environment
-  //////////COMNTAR ESTA OPCION
+  //////////COMENTAR ESTA OPCION
   //const apiKey = import.meta.env.N2YO_API_KEY;
   
   if (!apiKey) {
@@ -50,8 +43,6 @@ export const GET: APIRoute = async ({ url, request }) => {
     const n2yoUrl = `https://api.n2yo.com/rest/v1/satellite/above/${latitude}/${longitude}/0/${searchRadius}/${satelliteCategory}/&apiKey=${apiKey}`;
     
     const response = await fetch(n2yoUrl);
-
-    console.log("Fetching from N2YO API:", n2yoUrl);
     
     if (!response.ok) {
       throw new Error(`N2YO API error: ${response.status}`);
