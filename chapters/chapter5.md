@@ -299,4 +299,8 @@ const {
 - Manejo explícito de errores de red
 - Separación de concerns: fetch vs render
 
+## Apunte
+- Este componente es extremadamente verboso. Es una excelente oportunidad para aprovechar la funcionalidad de Astro de importarlo como componente de otro framework que permita hacerlo mejor.
+- Usa funcionalidades básicas como getElementById() porque Astro no cuenta con mecanismos mejores, pero otros frameworks puede que _sí_ los tengan.
+  
 > ⚙️ Podrías extraer la lógica JS a un módulo si crece más.
