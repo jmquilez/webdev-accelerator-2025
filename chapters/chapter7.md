@@ -1,0 +1,124 @@
+# Capítulo 7 · Página `index.astro`
+
+Fichero completo `src/pages/index.astro`:
+
+```astro
+// filepath: src/pages/index.astro
+---
+import Layout from '../layouts/Layout.astro';
+import LeafletMap from '../components/LeafletMap.astro';
+
+// Load API key from environment variables
+const apiKey = import.meta.env.N2YO_API_KEY;
+
+// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+---
+
+<Layout>
+	<main>
+		<section class="map-section">
+			<h1>Real-time Satellite Tracker</h1>
+			<p>Track specific satellites like the ISS, Starlink, and other interesting spacecraft</p>
+			{!apiKey && (
+				<div class="api-notice error">
+					<p><strong>Warning:</strong> No API key found. Please add N2YO_API_KEY to your .env file.</p>
+				</div>
+			)}
+			{apiKey && (
+				<div class="api-notice success">
+					<p><strong>✓ Connected:</strong> Using N2YO API for real-time satellite data</p>
+				</div>
+			)}
+			<LeafletMap 
+				latitude={41.649693} 
+				longitude={-0.887712} 
+				zoom={2}
+				height="600px"
+				apiKey={apiKey || ""}
+				showSatellites={true}
+				satelliteCategory={2}
+				searchRadius={180}
+				updateInterval={30000}
+			/>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	main {
+		padding: 2rem;
+		max-width: 1200px;
+		margin: 0 auto;
+		background: rgba(255, 255, 255, 0.75);
+		border-radius: 12px;
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+		backdrop-filter: blur(10px);
+		margin-top: 2rem;
+		margin-bottom: 2rem;
+		position: relative;
+		z-index: 10;
+	}
+
+	.map-section {
+		text-align: center;
+		margin-bottom: 2rem;
+	}
+
+	h1 {
+		color: #333;
+		margin-bottom: 0.5rem;
+		font-size: 2.5rem;
+	}
+
+	p {
+		color: #666;
+		margin-bottom: 2rem;
+		font-size: 1.1rem;
+	}
+
+	.api-notice {
+		border-radius: 8px;
+		padding: 1rem;
+		margin: 1rem 0;
+		text-align: left;
+	}
+
+	.api-notice.success {
+		background: #d4edda;
+		border: 1px solid #c3e6cb;
+	}
+
+	.api-notice.success p {
+		margin: 0;
+		color: #0d4318;
+		font-weight: 500;
+	}
+
+	.api-notice.error {
+		background: #f8d7da;
+		border: 1px solid #f5c6cb;
+	}
+
+	.api-notice.error p {
+		margin: 0;
+		color: #721c24;
+	}
+
+	.api-notice a {
+		color: #0066cc;
+		text-decoration: none;
+	}
+
+	.api-notice a:hover {
+		text-decoration: underline;
+	}
+</style>
+```
+
+## Notas
+- Mensaje condicional según existencia de API key
+- Podrías internacionalizar textos (i18n) si escalas
+- `Welcome.astro` está importado pero no se usa (limpiable), viene por defecto cuando creas el proyecto con Astro
+
+> ♻️ Eliminando imports no usados reduces ruido cognitivo. YAGNI (moreless)!!

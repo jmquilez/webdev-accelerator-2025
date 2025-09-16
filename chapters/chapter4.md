@@ -1,0 +1,138 @@
+# Capítulo 4 · Layout global
+
+Fichero completo `src/layouts/Layout.astro`:
+
+```astro
+// filepath: src/layouts/Layout.astro
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<!-- Google Fonts - Nunito -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+		<title>Astro Basics</title>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	/* Global font setup with Nunito */
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+		font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+		font-optical-sizing: auto;
+		font-weight: 400;
+		font-style: normal;
+		background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #3a7bd5 100%);
+		min-height: 100vh;
+		position: relative;
+		overflow-x: hidden;
+	}
+
+	/* Animated background stars */
+	body::before {
+		content: '';
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: 
+			radial-gradient(2px 2px at 50px 50px, white, transparent),
+			radial-gradient(1px 1px at 150px 100px, white, transparent),
+			radial-gradient(3px 3px at 250px 30px, white, transparent),
+			radial-gradient(1px 1px at 350px 80px, white, transparent),
+			radial-gradient(2px 2px at 450px 120px, white, transparent),
+			radial-gradient(1px 1px at 100px 180px, white, transparent),
+			radial-gradient(2px 2px at 300px 160px, white, transparent),
+			radial-gradient(1px 1px at 400px 40px, white, transparent);
+		background-repeat: repeat;
+		background-size: 500px 200px;
+		animation: driftA 18s linear infinite, twinkleA 2.3s ease-in-out infinite alternate;
+		z-index: 0;
+		pointer-events: none;
+	}
+
+	body::after {
+		content: '';
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: 
+			radial-gradient(1px 1px at 80px 70px, white, transparent),
+			radial-gradient(2px 2px at 200px 140px, white, transparent),
+			radial-gradient(1px 1px at 320px 60px, white, transparent),
+			radial-gradient(3px 3px at 420px 100px, white, transparent);
+		background-repeat: repeat;
+		background-size: 600px 180px;
+		animation: driftB 22s linear infinite, twinkleB 1.7s ease-in-out infinite alternate;
+		z-index: 0;
+		pointer-events: none;
+		opacity: 0.7;
+	}
+
+	@keyframes driftA {
+		0% { transform: translateX(0) translateY(0) rotate(0deg); }
+		25% { transform: translateX(-80px) translateY(-30px) rotate(90deg); }
+		50% { transform: translateX(-160px) translateY(10px) rotate(180deg); }
+		75% { transform: translateX(-240px) translateY(-60px) rotate(270deg); }
+		100% { transform: translateX(-320px) translateY(-20px) rotate(360deg); }
+	}
+
+	@keyframes driftB {
+		0% { transform: translateX(0) translateY(0) rotate(0deg); }
+		33% { transform: translateX(120px) translateY(40px) rotate(-120deg); }
+		66% { transform: translateX(40px) translateY(-80px) rotate(-240deg); }
+		100% { transform: translateX(-200px) translateY(30px) rotate(-360deg); }
+	}
+
+	@keyframes twinkleA {
+		0% { opacity: 0.2; }
+		100% { opacity: 0.9; }
+	}
+
+	@keyframes twinkleB {
+		0% { opacity: 0.4; }
+		100% { opacity: 0.7; }
+	}
+
+	/* Font weight utilities */
+	.font-light { font-weight: 300; }
+	.font-normal { font-weight: 400; }
+	.font-medium { font-weight: 500; }
+	.font-semibold { font-weight: 600; }
+	.font-bold { font-weight: 700; }
+	.font-extrabold { font-weight: 800; }
+
+	/* Ensure all common elements inherit the font */
+	h1, h2, h3, h4, h5, h6,
+	p, span, div, a, button,
+	input, textarea, select,
+	label, li, td, th {
+		font-family: inherit;
+	}
+</style>
+```
+
+## Notas
+- Usa `<slot />` para insertar el contenido de cada página
+- Los estilos globales controlan fondo y tipografía
+- Animación de estrellas: puro CSS, no sobrecarga JS
+
+## Mejora sugerida
+Mover animaciones a un CSS separado (`src/assets/global.css`) para claridad.
+
+> 🪄 El layout debe ser lo más limpio posible; evita lógica de negocio aquí.
