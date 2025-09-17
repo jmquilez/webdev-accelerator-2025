@@ -17,7 +17,7 @@ Fichero `package.json` completo:
   "dependencies": {
     "@astrojs/node": "^9.4.3",
     "astro": "^5.13.7",
-    "leaflet": "^1.9.4",
+    "leaflet": "^1.9.4"
   },
   "devDependencies": {
     "@types/leaflet": "^1.9.20",
@@ -26,6 +26,8 @@ Fichero `package.json` completo:
   }
 }
 ```
+
+> 📝 Ya puedes ejecutar `npm install` instalar todas estas dependencias en el proyecto
 
 ## Para qué sirve cada una (resumen)
 - `astro`: Framework base

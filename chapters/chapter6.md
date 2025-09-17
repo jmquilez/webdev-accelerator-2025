@@ -5,7 +5,7 @@ Fichero completo `src/pages/api/satellites.ts`:
 ```ts
 // filepath: src/pages/api/satellites.ts
 import type { APIRoute } from 'astro';
-import { N2YO_API_KEY as apiKey } from 'astro:env/client';
+// import { N2YO_API_KEY as apiKey } from 'astro:env/server';
 
 export const GET: APIRoute = async ({ url, request }) => {
   // Try multiple ways to get the parameters
@@ -22,8 +22,7 @@ export const GET: APIRoute = async ({ url, request }) => {
   console.log('Extracted params:', { latitude, longitude, searchRadius, satelliteCategory, limit });
   
   // Get API key from environment
-  //////////COMENTAR ESTA OPCION
-  //const apiKey = import.meta.env.N2YO_API_KEY;
+  const apiKey = import.meta.env.N2YO_API_KEY;
   
   if (!apiKey) {
     return new Response(JSON.stringify({ error: 'API key not configured' }), {

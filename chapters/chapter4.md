@@ -3,7 +3,6 @@
 Fichero completo `src/layouts/Layout.astro`:
 
 ```astro
-// filepath: src/layouts/Layout.astro
 <!doctype html>
 <html lang="en">
 	<head>

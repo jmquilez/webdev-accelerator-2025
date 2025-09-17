@@ -1,13 +1,14 @@
 # Capítulo 8 · Ejecución
 
 ## Desarrollo local
+> Recuerda ejecutar `npm install` si no lo has hecho todavía
 ```bash
 npm run dev
 ```
 Abre: http://localhost:4321
 
 ## Variables de entorno
-Crea `.env`:
+Crea `.env` (`.env.example` es únicamente una plantilla, la app sólo os va a reconocer el `.env`):
 ```env
 N2YO_API_KEY=TU_CLAVE_REAL
 ```
